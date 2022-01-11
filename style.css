@@ -108,8 +108,7 @@ input[type = radio] {
     font-size: 20px;
     font-family: 'Libre Baskerville', serif;
     font-weight: bold;
-    
-    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+
 }
 
 button.read{
@@ -138,6 +137,62 @@ button.read:hover{
     color: var(--turquoise);
 }
 
+@media screen and (max-width:1200px) {
+    #books{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-content: space-around;
+    }    
+}
+
+@media screen and (max-width:850px) {
+    #books{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-content: space-around;
+    }    
+}
+
+@media screen and (max-width:600px) {
+    #books{
+        font-size: 17px;
+    }   
+}
+
+@media screen and (max-width:500px) {
+    #books{
+        font-size: 15px;
+    }   
+}
+
+@media screen and (max-width:440px) {
+    #books{
+        display: grid;
+        grid-template-columns: 1fr;
+        font-size: 20px;
+        align-content: space-around;
+    }    
+}
+
+@media screen and (max-width:310px) {
+    #books{
+        display: grid;
+        grid-template-columns: 1fr;
+        font-size: 18px;
+        align-content: space-around;
+    }    
+}
+
+@media screen and (max-width:310px) {
+    #books{
+        display: grid;
+        grid-template-columns: 1fr;
+        font-size: 15px;
+        align-content: space-around;
+        padding-left: 10px;
+
+    }    
+}
 
 /* .form{
     height: 1000px;
