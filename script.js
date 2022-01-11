@@ -39,26 +39,29 @@ submitButton.addEventListener("click",(event)=>{
     nameNode.innerText = `Name = ${x.name}`
     bookDiv.appendChild(nameNode);
     
-    let authorNode = document.createElement('h2');
+    let authorNode = document.createElement('p');
     authorNode.innerText = `Author = ${x.author}`
     nameNode.appendChild(authorNode)
     
-    let pageNode = document.createElement('h2');
-    pageNode.innerText = `Number of pages = ${x.pages}`
+    let pageNode = document.createElement('p');
+    pageNode.innerText = `No. of pages = ${x.pages}`
     nameNode.appendChild(pageNode)
     
     var readButton = document.createElement("button");
-    readButton.innerText = "read"
+    readButton.innerText = "Read"
+    readButton.classList.add("read")
     nameNode.appendChild(readButton)
 
     readButton.addEventListener("click", ()=>{
-        if (readButton.innerText == "read"){
-            readButton.innerText = "not read"
+        if (readButton.innerText == "Read"){
+            readButton.innerText = "Not Read"
         }
-        else if(readButton.innerText == "not read"){
-            readButton.innerText = "read"
+        else if(readButton.innerText == "Not Read"){
+            readButton.innerText = "Read"
         }
     })
+
+
     // let readNode = document.createElement('h2');
     // readNode.innerText = `Read = ${x.read}`
     // nameNode.appendChild(readNode)
