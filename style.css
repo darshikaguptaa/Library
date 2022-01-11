@@ -99,6 +99,15 @@ input[type = radio] {
     cursor: pointer;
 }
 
+#close{
+    background-color: transparent;
+    border: none;
+    transform: rotate(45deg);
+    font-size: 30px;
+    position: relative;
+    left: 90%;
+}
+
 #books{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;

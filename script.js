@@ -3,6 +3,7 @@ let formBox = document.getElementById("container");
 let submitButton = document.getElementById("submit");
 let bookDiv = document.getElementById("books");
 let myForm = document.getElementById("my-form");
+let closeButton = document.getElementById("close");
 
 let formOpen = false;
 
@@ -23,7 +24,9 @@ newButton.addEventListener("click",()=>{
     }
 })
 
-submitButton.addEventListener("click",(event)=>{ 
+submitButton.addEventListener('click',(event)=>{ 
+
+
     event.preventDefault()
 
     let nameInput = document.getElementById("name").value;
@@ -34,6 +37,7 @@ submitButton.addEventListener("click",(event)=>{
     books.push(x);
     console.log(books);
     
+
     let nameNode = document.createElement('div');
     nameNode.classList.add("book");
     nameNode.innerText = `Name = ${x.name}`
@@ -60,17 +64,27 @@ submitButton.addEventListener("click",(event)=>{
             readButton.innerText = "Read"
         }
     })
-
-
-    // let readNode = document.createElement('h2');
-    // readNode.innerText = `Read = ${x.read}`
-    // nameNode.appendChild(readNode)
-
-
     formBox.style.transform ="scale(0)";
     formOpen = false;
 
+    closeButton.addEventListener("click",(event)=>{
+
+        event.preventDefault()
+        if(formOpen)
+        {
+            formBox.style.transform =" scale(0)"
+            formOpen =  false;
+            return
+        }
+
+    })
+
+    // myForm.reset();
+
 })
+
+
+
 
 
 
