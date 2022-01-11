@@ -151,11 +151,19 @@ button.read:hover{
         grid-template-columns: 1fr 1fr;
         align-content: space-around;
     }    
+    #container{
+        position: absolute;
+        left: 23%;
+    }
 }
 
 @media screen and (max-width:600px) {
     #books{
         font-size: 17px;
+    }
+    #container{
+        position: absolute;
+        left: 10%;
     }   
 }
 
@@ -163,6 +171,14 @@ button.read:hover{
     #books{
         font-size: 15px;
     }   
+    #container{
+        position: absolute;
+        left: 10%;
+        width: 300px;
+    }  
+    #submit{
+        font-size: 1.2em;
+    }
 }
 
 @media screen and (max-width:440px) {
@@ -172,6 +188,17 @@ button.read:hover{
         font-size: 20px;
         align-content: space-around;
     }    
+}
+
+@media screen and (max-width:400px) {
+    #container{
+        position: absolute;
+        left: 5%;
+        width: 250px;
+    }  
+    #submit{
+        font-size: 1em;
+    }
 }
 
 @media screen and (max-width:310px) {
