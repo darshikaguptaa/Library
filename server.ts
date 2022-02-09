@@ -3,6 +3,7 @@ import { serve, readableStreamFromReader } from "./deps.ts";
 async function requestHandler(req: Request): Promise<Response> {
 	const url = new URL(req.url);
 	if (req.method === "GET") {
+		console.log(url.pathname);
 		if (url.pathname === "/") {
 			try {
 				const file = await Deno.open("./Client/index.html", { read: true });
@@ -47,5 +48,7 @@ async function requestHandler(req: Request): Promise<Response> {
 	});
 }
 
-console.log("Listening on localhost:3000");
-serve(requestHandler, { port: 3000 });
+const port = parseInt(Deno.env.get("PORT") ?? "8000");
+
+console.log("Listening on port ", port);
+serve(requestHandler, { port });
