@@ -99,13 +99,16 @@ input[type = radio] {
     cursor: pointer;
 }
 
+
 #close{
     background-color: transparent;
     border: none;
     transform: rotate(45deg);
     font-size: 30px;
-    position: relative;
-    left: 90%;
+    position: absolute;
+    bottom: 90%;
+    left: 88%;
+    font-size: 2em;
 }
 
 #books{
@@ -118,27 +121,6 @@ input[type = radio] {
     font-family: 'Libre Baskerville', serif;
     font-weight: bold;
 
-}
-
-button.read{
-    min-width: 100px;
-    height: 45px;
-    position: relative;
-    left: 80px;
-    border-radius: 10px;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 17px;
-    cursor: pointer;
-    color: var(--turquoise);
-    background-color: var(--gray);
-    transition: ease 0.5s;
-}
-
-button.read:hover{
-    min-width: 130px;
-    height: 55px;
-    font-size: 20px;
-    left: 60px;
 }
 
 .book{
