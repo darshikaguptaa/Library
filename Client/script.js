@@ -1,100 +1,87 @@
-let newButton = document.getElementById("new-book");
-let formBox = document.getElementById("container");
-let submitButton = document.getElementById("submit");
-let bookDiv = document.getElementById("books");
-let myForm = document.getElementById("my-form");
-let closeButton = document.getElementById("close");
+import { sendData } from "./dist/post-request.js";
+
+const newBookBtn = document.getElementById("new-book");
+const formBox = document.getElementById("container");
+const submitButton = document.getElementById("submit");
+const bookDiv = document.getElementById("books");
+const closeButton = document.getElementById("close");
 
 let formOpen = false;
 
-function newBook(name,author,pages)
-{
-    this.name = name;
-    this.author= author;
-    this.pages = pages;
+class Book {
+	constructor(name, author, pages) {
+		this.name = name;
+		this.author = author;
+		this.pages = pages;
+	}
 }
 
-let books = []
+const books = [];
 
+newBookBtn.addEventListener("click", () => {
+	if (formOpen === false) {
+		formBox.style.transform = "scale(1)";
+		formOpen = true;
+	}
+});
 
-newButton.addEventListener("click",()=>{
-    if(formOpen===false)
-    {
-        formBox.style.transform ="scale(1)";
-        formOpen = true;  
-    }
-})
+submitButton.addEventListener("click", (event) => {
+	event.preventDefault();
 
-submitButton.addEventListener('click',(event)=>{ 
+	const bookName = document.getElementById("name").value;
+	const authorName = document.getElementById("author").value;
+	const pageCount = document.getElementById("pages").value;
 
-    
-    event.preventDefault()
-    
-    let nameInput = document.getElementById("name").value;
-    let authorInput = document.getElementById("author").value;
-    let pagesInput = document.getElementById("pages").value;
-    
-    let x = new newBook(nameInput,authorInput,pagesInput);
-    console.log(x)
-    books.push(x);
-    console.log(books);
+	const newBook = new Book(bookName, authorName, pageCount);
+	books.push(newBook);
+	console.log(newBook);
+	console.log(books);
 
-    localStorage.setItem("Book",JSON.stringify(books)); 
-    addOne(x)
+	sendData(newBook);
 
-    formBox.style.transform ="scale(0)";
-    formOpen = false;
-    
-})
-closeButton.addEventListener("click",(event)=>{
-    
-    event.preventDefault()
-    if(formOpen)
-    {
-        formBox.style.transform ="scale(0)"
-        formOpen =  false;
-        return
-    }
-    
-})
+	localStorage.setItem("Book", JSON.stringify(books));
+	addOne(newBook);
 
-if (books.length==0){
-    if (localStorage.length == 0){
-        books = []
-    }
-    else{
-        books = JSON.parse(localStorage.getItem("Book"))
-    }
-    add()
+	formBox.style.transform = "scale(0)";
+	formOpen = false;
+});
+
+closeButton.addEventListener("click", (event) => {
+	event.preventDefault();
+	if (formOpen) {
+		formBox.style.transform = "scale(0)";
+		formOpen = false;
+		return;
+	}
+});
+
+if (books.length == 0) {
+	if (localStorage.length == 0) {
+		books = [];
+	} else {
+		books = JSON.parse(localStorage.getItem("Book"));
+	}
+	add();
 }
 
-function add(){
-    for (const obj of books) {
-        console.log(obj)
-        addOne(obj)
-    }
+function add() {
+	for (const obj of books) {
+		console.log(obj);
+		addOne(obj);
+	}
 }
 
+function addOne(obj) {
+	const nameNode = document.createElement("div");
+	nameNode.classList.add("book");
+	nameNode.textContent = `Name = ${obj.name}`;
+	bookDiv.appendChild(nameNode);
 
+	const authorNode = document.createElement("p");
+	authorNode.textContent = `Author = ${obj.author}`;
+	nameNode.appendChild(authorNode);
 
-function addOne(obj){
-    let nameNode = document.createElement('div');
-    nameNode.classList.add("book");
-    nameNode.textContent = `Name = ${obj.name}`
-    bookDiv.appendChild(nameNode);
-    
-    let authorNode = document.createElement('p');
-    authorNode.textContent = `Author = ${obj.author}`
-    nameNode.appendChild(authorNode)
-    
-    let pageNode = document.createElement('p');
-    pageNode.textContent = `No. of pages = ${obj.pages}`
-    nameNode.appendChild(pageNode)
+	const pageNode = document.createElement("p");
+	pageNode.textContent = `No. of pages = ${obj.pages}`;
+	nameNode.appendChild(pageNode);
 }
-
-
-
-
-
-
-
