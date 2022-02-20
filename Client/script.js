@@ -1,3 +1,5 @@
+"use strict";
+
 import { sendData } from "./dist/post-request.js";
 
 const newBookBtn = document.getElementById("new-book");
@@ -19,7 +21,7 @@ class Book {
 const books = [];
 
 newBookBtn.addEventListener("click", () => {
-	if (formOpen === false) {
+	if (!formOpen) {
 		formBox.style.transform = "scale(1)";
 		formOpen = true;
 	}
@@ -55,11 +57,12 @@ closeButton.addEventListener("click", (event) => {
 	}
 });
 
-if (books.length == 0) {
-	if (localStorage.length == 0) {
-		books = [];
+if (!books.length) {
+	if (localStorage.length) {
+		const localStorageObj = JSON.parse(localStorage.getItem("Book"));
+		books.push(localStorageObj);
 	} else {
-		books = JSON.parse(localStorage.getItem("Book"));
+		books.length = 0; // clear the array, books = [] was removed because array is declared constant
 	}
 	add();
 }
