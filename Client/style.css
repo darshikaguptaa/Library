@@ -1,215 +1,217 @@
-*,*::before,*::after{
-    /* box-sizing: border-box; */
-    overflow-x: hidden;
-    /* overflow-y: hidden  ; */
-}  
-
-:root{
-    --gray:#171717;
-    --turquoise:#40E0D0;
-}
-body{
-    padding: 0;
-    margin: 0%;
-    min-height: 100vh;
-    background-color: var(--gray);
-}
-#heading{
-    color: var(--turquoise);
-    text-align: center;
-    font-family: 'Libre Baskerville', serif;
-    font-size: 3em;
-}
-#new-book{
-    background-color: var(--turquoise);
-    font-size: 2.5em;
-    font-weight: bold;
-    border: none;
-    position: fixed;
-    bottom:5% ;
-    right: 5%;
-    height: 50px;
-    width: 50px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: ease 0.75s;
+*,
+*::before,
+*::after {
+	/* box-sizing: border-box; */
+	overflow-x: hidden;
+	/* overflow-y: hidden  ; */
 }
 
-#new-book:hover{
-    font-size: 5em;
-    height: 100px;
-    width: 100px;
-    transform: rotate(90deg);
+:root {
+	--gray: #171717;
+	--turquoise: #40e0d0;
+}
+body {
+	padding: 0;
+	margin: 0%;
+	min-height: 100vh;
+	background-color: var(--gray);
+}
+#heading {
+	color: var(--turquoise);
+	text-align: center;
+	font-family: "Libre Baskerville", serif;
+	font-size: 3em;
+}
+#new-book {
+	background-color: var(--turquoise);
+	font-size: 2.5em;
+	font-weight: bold;
+	border: none;
+	position: fixed;
+	bottom: 5%;
+	right: 5%;
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: ease 0.75s;
 }
 
-#container{
-    transform: scale(0);
-    background-color: var(--turquoise);
-    width: 390px;
-    height: 525px;
-    padding: 0 15px 15px 15px;
-    position: absolute;
-    left: 37%;
-    bottom: 10%;
-    border-radius: 20px;
-    transition: 0.5s ease;
-    box-shadow: 7px gray;
-    z-index: 1000;
+#new-book:hover {
+	font-size: 5em;
+	height: 100px;
+	width: 100px;
+	transform: rotate(90deg);
 }
 
-#new-head{
-    color: var(--gray);
-    font-family: 'Libre Baskerville', serif;
-    font-size: 2.3em;
-    text-align: center;
+#container {
+	transform: scale(0);
+	background-color: var(--turquoise);
+	width: 390px;
+	height: 525px;
+	padding: 0 15px 15px 15px;
+	position: absolute;
+	left: 37%;
+	bottom: 10%;
+	border-radius: 20px;
+	transition: 0.5s ease;
+	box-shadow: 7px gray;
+	z-index: 1000;
 }
 
-#form > label,h3{
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.2em;
-    padding: 5px;
+#new-head {
+	color: var(--gray);
+	font-family: "Libre Baskerville", serif;
+	font-size: 2.3em;
+	text-align: center;
 }
 
-#name,#author,#pages{
-    width: 90%;
-    height: 30px;
-    position: relative;
-    left: 5px;
-    top: 5px;
-    border-radius: 3px;
-    border: var(--gray) solid 1px;
+#form > label,
+h3 {
+	font-family: "Libre Baskerville", serif;
+	font-size: 1.2em;
+	padding: 5px;
 }
 
-input[type = radio] {
-    transform: scale(1.8);
-    border: var(--gray) solid 1px;
+#name,
+#author,
+#pages {
+	width: 90%;
+	height: 30px;
+	position: relative;
+	left: 5px;
+	top: 5px;
+	border-radius: 3px;
+	border: var(--gray) solid 1px;
 }
 
-#submit{
-    width: 30%;
-    height: 50px;
-    position: relative;
-    left: 30%;
-    border-radius: 5px;
-    background-color: var(--gray);
-    color: var(--turquoise);
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.5em;
-    box-shadow: var(--gray) 2px 2px;
-    cursor: pointer;
+input[type="radio"] {
+	transform: scale(1.8);
+	border: var(--gray) solid 1px;
 }
 
-
-#close{
-    background-color: transparent;
-    border: none;
-    transform: rotate(45deg);
-    font-size: 30px;
-    position: absolute;
-    bottom: 90%;
-    left: 88%;
-    font-size: 2em;
+#submit {
+	width: 30%;
+	height: 50px;
+	position: relative;
+	left: 30%;
+	border-radius: 5px;
+	background-color: var(--gray);
+	color: var(--turquoise);
+	font-family: "Libre Baskerville", serif;
+	font-size: 1.5em;
+	box-shadow: var(--gray) 2px 2px;
+	cursor: pointer;
 }
 
-#books{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    align-content: space-around;
-    padding-left: 40px;
-    row-gap: 50px;
-    font-size: 20px;
-    font-family: 'Libre Baskerville', serif;
-    font-weight: bold;
-
+#close {
+	background-color: transparent;
+	border: none;
+	transform: rotate(45deg);
+	font-size: 30px;
+	position: absolute;
+	bottom: 90%;
+	left: 88%;
+	font-size: 2em;
 }
 
-.book{
-    font-family: 'Libre Baskerville', serif;
-    color: var(--turquoise);
+#books {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	align-content: space-around;
+	padding-left: 40px;
+	row-gap: 50px;
+	font-size: 20px;
+	font-family: "Libre Baskerville", serif;
+	font-weight: bold;
 }
 
-@media screen and (max-width:1200px) {
-    #books{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        align-content: space-around;
-    }    
+.book {
+	font-family: "Libre Baskerville", serif;
+	color: var(--turquoise);
 }
 
-@media screen and (max-width:850px) {
-    #books{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-content: space-around;
-    }    
-    #container{
-        position: absolute;
-        left: 23%;
-    }
+@media screen and (max-width: 1200px) {
+	#books {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-content: space-around;
+	}
 }
 
-@media screen and (max-width:600px) {
-    #books{
-        font-size: 17px;
-    }
-    #container{
-        position: absolute;
-        left: 10%;
-    }   
+@media screen and (max-width: 850px) {
+	#books {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-content: space-around;
+	}
+	#container {
+		position: absolute;
+		left: 23%;
+	}
 }
 
-@media screen and (max-width:500px) {
-    #books{
-        font-size: 15px;
-    }   
-    #container{
-        position: absolute;
-        left: 10%;
-        width: 300px;
-    }  
-    #submit{
-        font-size: 1.2em;
-    }
+@media screen and (max-width: 600px) {
+	#books {
+		font-size: 17px;
+	}
+	#container {
+		position: absolute;
+		left: 10%;
+	}
 }
 
-@media screen and (max-width:440px) {
-    #books{
-        display: grid;
-        grid-template-columns: 1fr;
-        font-size: 20px;
-        align-content: space-around;
-    }    
+@media screen and (max-width: 500px) {
+	#books {
+		font-size: 15px;
+	}
+	#container {
+		position: absolute;
+		left: 10%;
+		width: 300px;
+	}
+	#submit {
+		font-size: 1.2em;
+	}
 }
 
-@media screen and (max-width:400px) {
-    #container{
-        position: absolute;
-        left: 5%;
-        width: 250px;
-    }  
-    #submit{
-        font-size: 1em;
-    }
+@media screen and (max-width: 440px) {
+	#books {
+		display: grid;
+		grid-template-columns: 1fr;
+		font-size: 20px;
+		align-content: space-around;
+	}
 }
 
-@media screen and (max-width:310px) {
-    #books{
-        display: grid;
-        grid-template-columns: 1fr;
-        font-size: 18px;
-        align-content: space-around;
-    }    
+@media screen and (max-width: 400px) {
+	#container {
+		position: absolute;
+		left: 5%;
+		width: 250px;
+	}
+	#submit {
+		font-size: 1em;
+	}
 }
 
-@media screen and (max-width:310px) {
-    #books{
-        display: grid;
-        grid-template-columns: 1fr;
-        font-size: 15px;
-        align-content: space-around;
-        padding-left: 10px;
+@media screen and (max-width: 310px) {
+	#books {
+		display: grid;
+		grid-template-columns: 1fr;
+		font-size: 18px;
+		align-content: space-around;
+	}
+}
 
-    }    
+@media screen and (max-width: 310px) {
+	#books {
+		display: grid;
+		grid-template-columns: 1fr;
+		font-size: 15px;
+		align-content: space-around;
+		padding-left: 10px;
+	}
 }
 
 /* .form{
