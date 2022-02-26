@@ -3,12 +3,13 @@ import { readableStreamFromReader, writableStreamFromWriter } from "./deps.ts";
 export async function requestHandler(req: Request): Promise<Response> {
 	const url = new URL(req.url);
 	if (req.method === "GET") {
-		console.log(url.pathname);
 		const response = await getRequestHandler(url);
 		return response;
 	} else if (req.method === "POST") {
-		console.log("wroking");
 		if (req.body) {
+			return await postRequestHandler(url, req.body);
+		}
+		/* if (req.body) {
 			const file = await Deno.open("./User-Data/books.json", {
 				write: true,
 				create: true,
@@ -16,7 +17,7 @@ export async function requestHandler(req: Request): Promise<Response> {
 			const writableStream = writableStreamFromWriter(file);
 			console.log(writableStream);
 			await req.body.pipeTo(writableStream);
-		}
+		} */
 		return new Response("Post Request Recieved", {
 			status: 200,
 			headers: { "content-type": "text-plain; charset=utf-8" },
@@ -43,7 +44,9 @@ async function getRequestHandler(url: { pathname: string }): Promise<Response> {
 				"text/javascript"
 			);
 		case "/signin":
-			return await fileResponse("./Clinet/static/signin.html", "text/html");
+			return await fileResponse("./Client/static/signin.html", "text/html");
+		case "/userAuth.js":
+			return await fileResponse("./Client/userAuth.js", "text/javascript");
 		default:
 			return new Response("Henlo", {
 				status: 200,
@@ -68,4 +71,24 @@ async function fileResponse(
 		status: 200,
 		headers: { "content-type": fileType },
 	});
+}
+
+async function postRequestHandler(
+	url: { pathname: string },
+	reqBody: ReadableStream
+): Promise<Response> {
+	if (url.pathname === "/signin") {
+		const readStream = await reqBody.getReader().read();
+		const body = new TextDecoder("utf-8").decode(readStream.value);
+
+		return new Response("Auth Details Recieved", {
+			status: 200,
+			headers: { "content-type": "text-plain; charset=utf-8" },
+		});
+	} else {
+		return new Response("This request is not handled [yet]", {
+			status: 404,
+			headers: { "content-type": "text-plain; charset=utf-8" },
+		});
+	}
 }
