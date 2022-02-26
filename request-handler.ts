@@ -30,60 +30,42 @@ export async function requestHandler(req: Request): Promise<Response> {
 }
 
 async function getRequestHandler(url: { pathname: string }): Promise<Response> {
-	if (url.pathname === "/") {
-		try {
-			const file = await Deno.open("./Client/index.html", { read: true });
-			const readableStream = readableStreamFromReader(file);
-			return new Response(readableStream, {
+	switch (url.pathname) {
+		case "/":
+			return await fileResponse("./Client/static/index.html", "text/html");
+		case "/style.css":
+			return await fileResponse("./Client/style.css", "text/css");
+		case "/script.js":
+			return await fileResponse("./Client/script.js", "text/javascript");
+		case "/dist/post-request.js":
+			return await fileResponse(
+				"./Client/dist/post-request.js",
+				"text/javascript"
+			);
+		case "/signin":
+			return await fileResponse("./Clinet/static/signin.html", "text/html");
+		default:
+			return new Response("Henlo", {
 				status: 200,
-				headers: { "content-type": "text/html" },
+				headers: { "content-type": "text-plain; charset=utf-8" },
 			});
-		} catch (err) {
-			console.error(err);
-			return new Response("index.html not found", { status: 404 });
-		}
-	} else if (url.pathname.startsWith("/style.css")) {
-		try {
-			const file = await Deno.open("./Client/style.css", { read: true });
-			const readableStream = readableStreamFromReader(file);
-			return new Response(readableStream, {
-				status: 200,
-				headers: { "content-type": "text/css" },
-			});
-		} catch (err) {
-			console.error(err);
-			return new Response("style.css not found", { status: 404 });
-		}
-	} else if (url.pathname.startsWith("/script.js")) {
-		try {
-			const file = await Deno.open("./Client/script.js", { read: true });
-			const readableStream = readableStreamFromReader(file);
-			return new Response(readableStream, {
-				status: 200,
-				headers: { "content-type": "text/javascript" },
-			});
-		} catch (err) {
-			console.error(err);
-			return new Response("script.js not found", { status: 404 });
-		}
-	} else if (url.pathname.startsWith("/dist/post-request.js")) {
-		try {
-			const file = await Deno.open("./Client/dist/post-request.js", {
-				read: true,
-			});
-			const readableStream = readableStreamFromReader(file);
-			return new Response(readableStream, {
-				status: 200,
-				headers: { "content-type": "text/javascript" },
-			});
-		} catch (err) {
-			console.error(err);
-			return new Response("script.js not found", { status: 404 });
-		}
-	} else {
-		return new Response("Henlo", {
-			status: 200,
-			headers: { "content-type": "text-plain; charset=utf-8" },
-		});
 	}
+}
+
+async function fileResponse(
+	fileNameWithPath: string,
+	fileType: string
+): Promise<Response> {
+	let file;
+	try {
+		file = await Deno.open(fileNameWithPath, { read: true });
+	} catch (e) {
+		console.error(e);
+		return new Response(`${fileNameWithPath} not found`, { status: 404 });
+	}
+	const readableStream = readableStreamFromReader(file);
+	return new Response(readableStream, {
+		status: 200,
+		headers: { "content-type": fileType },
+	});
 }
