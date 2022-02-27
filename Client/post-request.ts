@@ -33,3 +33,15 @@ export async function signin(obj: userAuth) {
 
 	return res.status === 200 ? "Success" : "Fail";
 }
+
+export async function signup(obj: userAuth) {
+	const res = await fetch("/signup", {
+		method: "POST",
+		body: JSON.stringify(obj),
+		headers: {
+			"content-type": "text/plain",
+		},
+	});
+
+	return res.status === 200 ? "Success" : "Fail";
+}

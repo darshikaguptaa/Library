@@ -32,3 +32,15 @@ export function signin(obj) {
         return res.status === 200 ? "Success" : "Fail";
     });
 }
+export function signup(obj) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield fetch("/signup", {
+            method: "POST",
+            body: JSON.stringify(obj),
+            headers: {
+                "content-type": "text/plain",
+            },
+        });
+        return res.status === 200 ? "Success" : "Fail";
+    });
+}
