@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 export function sendData(obj) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield fetch("../server.ts", {
+        const res = yield fetch("/store", {
             method: "POST",
             body: JSON.stringify(obj),
             headers: {
@@ -18,5 +18,29 @@ export function sendData(obj) {
         });
         console.log(res);
         return "henlo";
+    });
+}
+export function signin(obj) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield fetch("/signin", {
+            method: "POST",
+            body: JSON.stringify(obj),
+            headers: {
+                "content-type": "text/plain",
+            },
+        });
+        return res.status === 200 ? "Success" : "Fail";
+    });
+}
+export function signup(obj) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const res = yield fetch("/signup", {
+            method: "POST",
+            body: JSON.stringify(obj),
+            headers: {
+                "content-type": "text/plain",
+            },
+        });
+        return res.text();
     });
 }
