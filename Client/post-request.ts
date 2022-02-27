@@ -43,5 +43,5 @@ export async function signup(obj: userAuth) {
 		},
 	});
 
-	return res.status === 200 ? "Success" : "Fail";
+	return res.text();
 }

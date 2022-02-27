@@ -1,4 +1,5 @@
-import { readableStreamFromReader, writableStreamFromWriter } from "./deps.ts";
+import { readableStreamFromReader } from "./deps.ts";
+import { addUser } from "./user-data-handler.ts";
 
 export async function requestHandler(req: Request): Promise<Response> {
 	const url = new URL(req.url);
@@ -19,7 +20,7 @@ export async function requestHandler(req: Request): Promise<Response> {
 			await req.body.pipeTo(writableStream);
 		} */
 		return new Response("Post Request Recieved", {
-			status: 200,
+			status: 400,
 			headers: { "content-type": "text-plain; charset=utf-8" },
 		});
 	} else {
@@ -43,8 +44,8 @@ async function getRequestHandler(url: { pathname: string }): Promise<Response> {
 				"./Client/dist/post-request.js",
 				"text/javascript"
 			);
-		case "/signin":
-			return await fileResponse("./Client/static/signin.html", "text/html");
+		case "/userauth":
+			return await fileResponse("./Client/static/user-auth.html", "text/html");
 		case "/userAuth.js":
 			return await fileResponse("./Client/userAuth.js", "text/javascript");
 		default:
@@ -77,18 +78,33 @@ async function postRequestHandler(
 	url: { pathname: string },
 	reqBody: ReadableStream
 ): Promise<Response> {
-	if (url.pathname === "/signin") {
-		const readStream = await reqBody.getReader().read();
-		const body = new TextDecoder("utf-8").decode(readStream.value);
+	switch (url.pathname) {
+		case "/signup":
+			return await signup(reqBody);
+		case "/signin":
+		default:
+			return new Response("This request is not handled [yet]", {
+				status: 404,
+				headers: { "content-type": "text-plain; charset=utf-8" },
+			});
+	}
+}
 
-		return new Response("Auth Details Recieved", {
-			status: 200,
-			headers: { "content-type": "text-plain; charset=utf-8" },
-		});
-	} else {
-		return new Response("This request is not handled [yet]", {
-			status: 404,
+async function signup(reqBody: ReadableStream): Promise<Response> {
+	const readStream = await reqBody.getReader().read();
+	const body = new TextDecoder("utf-8").decode(readStream.value);
+
+	const res = await addUser(JSON.parse(body));
+
+	if (!res.added) {
+		return new Response(res.msg, {
+			status: 400,
 			headers: { "content-type": "text-plain; charset=utf-8" },
 		});
 	}
+
+	return new Response(res.msg, {
+		status: 200,
+		headers: { "content-type": "text-plain; charset=utf-8" },
+	});
 }

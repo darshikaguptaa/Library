@@ -41,6 +41,6 @@ export function signup(obj) {
                 "content-type": "text/plain",
             },
         });
-        return res.status === 200 ? "Success" : "Fail";
+        return res.text();
     });
 }
