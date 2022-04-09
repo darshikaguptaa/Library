@@ -18,7 +18,7 @@ class Book {
 	}
 }
 
-const books = [];
+let books = [];
 
 newBookBtn.addEventListener("click", () => {
 	if (!formOpen) {
@@ -58,11 +58,11 @@ closeButton.addEventListener("click", (event) => {
 });
 
 if (!books.length) {
-	if (localStorage.length) {
-		const localStorageObj = JSON.parse(localStorage.getItem("Book"));
-		books.push(localStorageObj);
-	} else {
+	if (!localStorage.length) {
 		books.length = 0; // clear the array, books = [] was removed because array is declared constant
+	} else {
+		const localStorageArr = JSON.parse(localStorage.getItem("Book"));
+		books = [...localStorageArr];
 	}
 	add();
 }
